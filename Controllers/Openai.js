@@ -1,11 +1,12 @@
-require("dotenv").config();
-const { GoogleGenAI } = require("@google/genai");
-const client = new GoogleGenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
+    require("dotenv").config();
+    const { GoogleGenAI } = require("@google/genai");
+    const client = new GoogleGenAI({
+        apiKey: process.env.OPENAI_API_KEY
+    });
 
 const CHATGPT = async (Input) => {
     try {
+        console.log("Openai started");
         const response = await client.models.generateContent({
             model: "gemini-3-flash-preview",
             contents: `
@@ -40,7 +41,8 @@ const CHATGPT = async (Input) => {
 
             Job Description:${Input}`
         });
-        console.log(response.text);
+        console.log("open ai process Done");
+        return response.text;
     } catch (err) {
         console.log(err);
     }
